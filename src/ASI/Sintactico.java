@@ -14,7 +14,7 @@ public class Sintactico {
 
     private int is;
 
-    private String resultado="";
+    private String resultado = "";
     public String error, ante;
     private final String simbolos[] = {"ID", "Numero", "ent", "flot", "car", ",", ";", "+", "-", "*", "/", "(", ")", "=", "$", "P", "Tipo", "V", "A", "S", "E", "T", "F"};
     private final String estados[] = {"I0", "I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10", "I11", "I12", "I13", "I14", "I15", "I16", "I17", "I18", "I19", "I20", "I21", "I22", "I23", "I24", "I25", "I26", "I27", "I28", "I29", "I30", "I31", "I32", "I33", "I34", "I35", "I36", "I37"};
@@ -79,13 +79,10 @@ public class Sintactico {
         String arriba, entrada, entabla = "", termi;
         int accion, x, y;
         boolean ban = true;
-        // arriba = pila.peek();
         entrada = token;
-
         while (ban) {
             arriba = pila.peek();
             out:
-
             for (int i = 0; i < estados.length; i++) {
                 if (estados[i].equals(arriba)) {
                     for (int j = 0; j < simbolos.length; j++) {
@@ -119,7 +116,6 @@ public class Sintactico {
                                     break out;
                                 }
                             }
-
                         }
                     }
                 }
@@ -146,18 +142,16 @@ public class Sintactico {
                         resultado = "Error sintactico en " + linea + " se esperaba un Tipo o ID";
                         return;
                     }
-                    case "+", "-", "*", "/", "=" -> {
-                        resultado = "Error sintactico en " + linea + " se esperaba un numero o ID";
+                    case "+", "-", "*", "/", "=", ")" -> {
+                        resultado = "Error sintactico en " + linea + " se esperaba una funcion";
                         return;
                     }
                     default -> {
                         resultado = "Error sintactico en " + linea + " se esperaba ";
                         return;
-
                     }
                 }
-                            }
-
+            }
         }
     }
 

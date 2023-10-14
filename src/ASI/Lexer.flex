@@ -1,3 +1,4 @@
+package ASI;
 import ASI.Analisis;
 import java.io.*;
 import static ASI.Tokens.*;
@@ -34,7 +35,6 @@ int nu=0;
 <YYINITIAL> "int" {c.linea=yyline; lexeme=yytext();return ent;}
 <YYINITIAL> "float" {c.linea=yyline; lexeme=yytext();return flot;}
 <YYINITIAL> "char" {c.linea=yyline; lexeme=yytext();return car;}
-<YYINITIAL> "cad" {c.linea=yyline; lexeme=yytext();return cad;}
 <YYINITIAL> ";" {c.linea=yyline; lexeme=yytext();return  punto_coma;}
 <YYINITIAL> "." {c.linea=yyline; lexeme=yytext();return punto;}
 <YYINITIAL> "," {c.linea=yyline; lexeme=yytext();return coma;}

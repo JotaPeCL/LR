@@ -126,7 +126,7 @@ public class Compilador extends javax.swing.JFrame {
         try {
             Reader lector = new BufferedReader(new FileReader("archivo.txt"));
             Lexer lexer = new Lexer(lector);
-            String resultado = "";
+            String resultado = "",res;
             while (true) {
                 Tokens tokens = lexer.yylex();
                 if (tokens == null) {
@@ -138,13 +138,11 @@ public class Compilador extends javax.swing.JFrame {
                 }
                 switch (tokens) {
                     case Error:
-                        resultado +="Error lexico en la linea " + (c.linea + 1) + " con el lexema " + lexer.lexeme + "\n";
-                        System.exit(0);
+                        resultado += "Error lexico en la linea " + (c.linea + 1) + " con el lexema " + lexer.lexeme + "\n";
                         break;
                     case ent:
                     case flot:
                     case car:
-                    case cad:
                     case ID:
                     case Numero:
                         resultado += tokens + "\n";
@@ -160,9 +158,14 @@ public class Compilador extends javax.swing.JFrame {
                     case division:
                     case multiplicacion:
                         resultado += lexer.lexeme + "\n";
-                        ;
                         obs.Analisis("" + lexer.lexeme, c.linea + 1);
                         break;
+                }
+                res=obs.Resultado();
+                if (resultado.startsWith("Error") || res.startsWith("Error")) {
+                    JtaLex1.setText(resultado);
+                    JtaCompile.setText(obs.Resultado());
+                    break;
                 }
             }
 
@@ -176,12 +179,11 @@ public class Compilador extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private void Iniciar()
-    {
+    private void Iniciar() {
         Linea = new Linea(JtpCode);
         jScrollPane1.setRowHeaderView(Linea);
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

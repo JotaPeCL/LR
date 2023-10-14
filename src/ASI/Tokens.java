@@ -12,7 +12,6 @@ public enum Tokens {
     ent,
     flot,
     car,
-    cad,
     punto_coma,
     punto,
     coma,
