@@ -80,6 +80,7 @@ public class Sintactico {
         int accion, x, y;
         boolean ban = true;
         entrada = token;
+
         while (ban) {
             arriba = pila.peek();
             out:
@@ -125,38 +126,25 @@ public class Sintactico {
                 ante = entrada;
                 return;
             } else {
-                switch (ante) {
-                    case "ID" -> {
-                        resultado = "Error sintactico en " + linea + " se esperaba , o ;";
-                        return;
-                    }
-                    case "ent", "flot", "car" -> {
-                        resultado = "Error sintactico en " + linea + " se esperaba un ID";
-                        return;
-                    }
-                    case "Numero" -> {
-                        resultado = "Error sintactico en " + linea + " se esperaba un operador";
-                        return;
-                    }
-                    case ",", ";" -> {
-                        resultado = "Error sintactico en " + linea + " se esperaba un Tipo o ID";
-                        return;
-                    }
-                    case "+", "-", "*", "/", "=", ")" -> {
-                        resultado = "Error sintactico en " + linea + " se esperaba una funcion";
-                        return;
-                    }
-                    default -> {
-                        resultado = "Error sintactico en " + linea + " se esperaba ";
-                        return;
-                    }
-                }
+                resultado += "Error sintactico en la linea " + linea + " se esperaba:  " + Error(Integer.parseInt(arriba.split("I")[1])) + "\n";
+                return;
             }
         }
+    }
+
+    public String Error(int estado) {
+        String error = "";
+        int indice;
+        System.out.println(estado);
+        for (indice = 0; indice < 16; indice++) {
+            if (!tabla[estado][indice].equals("error")) {
+                error += simbolos[indice] + ", ";
+            }
+        }
+        return error;
     }
 
     public String Resultado() {
         return resultado;
     }
-
 }
